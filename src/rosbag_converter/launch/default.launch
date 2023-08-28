@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node name="rosbag_converter" pkg="rosbag_converter" type="rosbag_converter" output="screen"/>
+      
+</launch>

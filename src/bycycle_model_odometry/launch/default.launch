@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="param_config_name" default="vehicle_config" />
+    <arg name="config_file" default="$(find bycycle_model_odometry)/config/$(arg param_config_name).yaml" />
+  
+    <node pkg="bycycle_model_odometry" type="bycycle_model_odometry" name="vehicle_odomoetry" output="screen">
+        <rosparam command="load" file="$(arg config_file)" />
+    </node>
+
+</launch>

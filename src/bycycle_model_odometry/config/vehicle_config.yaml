@@ -1,0 +1,7 @@
+wheel_base: 4.8
+wheel_radius: 0.375
+wheel_width: 0.235
+wheel_tread: 2.17
+wheel_track_width: 2.17
+maximum_wheel_angle: 40.0 # degree
+drive_ratio: 5.13
