@@ -26,5 +26,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(${PROJECT_NAME} src/odometry_calculater_node.cpp)
+add_executable(${PROJECT_NAME} src/odometry_calculater_node.cpp src/odometry_calculater.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
