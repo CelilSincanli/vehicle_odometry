@@ -26,5 +26,5 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(${PROJECT_NAME} src/rviz_visualization_node.cpp)
+add_executable(${PROJECT_NAME} src/rviz_visualization_node.cpp src/rviz_visualization.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
