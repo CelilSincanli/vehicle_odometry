@@ -18,7 +18,9 @@ double odometry_calculater::calculateFrontWheelAngle(double steeringWheelAngleDe
 void odometry_calculater::vehicleOdometryCallback(const converter_messages::driving_parameters& msg)
 {
     double currentTime = ros::Time::now().toSec();
+    ROS_INFO_STREAM("currentTime: " << currentTime);
     double deltaTime = currentTime - lastUpdateTime;
+    ROS_INFO_STREAM("deltaTime: " << deltaTime);
     lastUpdateTime = currentTime;
 
     // Convert speed from km/h to m/s steer_angle_status
@@ -38,20 +40,22 @@ void odometry_calculater::vehicleOdometryCallback(const converter_messages::driv
 
     if (speed_mps != 0 )
     {
-       totalDistance += sqrt(pow(((currentPosition.position.x + position_dx) - currentPosition.position.x),2) + pow(((currentPosition.position.y + position_dy) - currentPosition.position.y),2));
+       totalDistance += sqrt(pow((position_dx),2) + pow((position_dy),2));
+       
+       currentPosition.position.x += position_dx;
+       currentPosition.position.y += position_dy;
+   
+       currentPosition.orientation.x = orientation_dx;
+       currentPosition.orientation.y = orientation_dy;
+       
+        // ROS_WARN_STREAM(yaw);
+        ROS_WARN_STREAM("currentPosition.position.x: " << currentPosition.position.x);
+        ROS_WARN_STREAM("currentPosition.position.y: " << currentPosition.position.y);
+        ROS_WARN_STREAM("totalDistance: " << totalDistance);
+
+       vehicle_odometry_pub.publish(currentPosition);
     }
-    
-    currentPosition.position.x += position_dx;
-    currentPosition.position.y += position_dy;
-
-    currentPosition.orientation.x = orientation_dx;
-    currentPosition.orientation.y = orientation_dy;
-
-    // ROS_WARN_STREAM(yaw);
-    ROS_WARN_STREAM("currentPosition.position.x: " << currentPosition.position.x);
-    ROS_WARN_STREAM("currentPosition.position.y: " << currentPosition.position.y);
-    ROS_WARN_STREAM("totalDistance: " << totalDistance);
-    vehicle_odometry_pub.publish(currentPosition);
+        
 }
 
 odometry_calculater::odometry_calculater(ros::NodeHandle &nh)
