@@ -1,4 +1,4 @@
-#include "vehicle_visaulization/rviz_visualization.hpp"
+#include "odometry_visualization/rviz_visualization.hpp"
 
 int main(int argc, char** argv)
 {

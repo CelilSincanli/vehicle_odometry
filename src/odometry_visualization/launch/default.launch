@@ -1,0 +1,6 @@
+<launch>
+  <!-- Specify the package and node to launch -->
+  <node pkg="odometry_visualization" type="odometry_visualizer_node" name="odometry_visualizer_node">
+    <!-- Add any parameters or arguments here if needed -->
+  </node>
+</launch>

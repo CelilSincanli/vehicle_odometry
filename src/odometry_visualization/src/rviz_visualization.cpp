@@ -1,4 +1,4 @@
-#include "vehicle_visaulization/rviz_visualization.hpp"
+#include "odometry_visualization/rviz_visualization.hpp"
 
 rviz_visualization::rviz_visualization(ros::NodeHandle &nh)
 {

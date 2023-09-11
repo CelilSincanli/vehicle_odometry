@@ -15,7 +15,7 @@ double odometry_calculater::calculateFrontWheelAngle(double steeringWheelAngleDe
     return desiredFrontWheelAngleDeg;
 }
 
-void odometry_calculater::vehicleOdometryCallback(const converter_messages::driving_parameters& msg)
+void odometry_calculater::vehicleOdometryCallback(const vehicle_dynamic_msgs::DrivingParameters& msg)
 {
     double currentTime = ros::Time::now().toSec();
     ROS_INFO_STREAM("currentTime: " << currentTime);

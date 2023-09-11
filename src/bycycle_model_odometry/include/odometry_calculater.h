@@ -4,7 +4,7 @@
 #include <ros/ros.h>
 #include <tf/tf.h>
 
-#include "converter_messages/driving_parameters.h"
+#include "vehicle_dynamic_msgs/DrivingParameters.h"
 
 class odometry_calculater
 {
@@ -30,7 +30,7 @@ public:
     explicit odometry_calculater(ros::NodeHandle &nh);
     ~odometry_calculater();
     double calculateFrontWheelAngle(double steeringWheelAngleDeg, double wheelbase, double trackWidth, double driveRatio);
-    void vehicleOdometryCallback(const converter_messages::driving_parameters& msg);
+    void vehicleOdometryCallback(const vehicle_dynamic_msgs::DrivingParameters& msg);
 
 };
 

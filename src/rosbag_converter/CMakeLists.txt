@@ -11,14 +11,14 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
-  converter_messages
+  vehicle_dynamic_msgs
   message_filters
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs converter_messages
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs vehicle_dynamic_msgs
   DEPENDS system_lib
 )
 

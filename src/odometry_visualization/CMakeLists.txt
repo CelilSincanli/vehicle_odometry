@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-set(PROJECT_NAME vehicle_visualization)
+set(PROJECT_NAME odometry_visualization)
 project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++")
@@ -11,13 +11,13 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
-  converter_messages
+  # converter_messages
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs converter_messages
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs #converter_messages
   DEPENDS system_lib
 )
 
