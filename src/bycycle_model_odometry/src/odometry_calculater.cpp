@@ -18,9 +18,9 @@ double odometry_calculater::calculateFrontWheelAngle(double steeringWheelAngleDe
 void odometry_calculater::vehicleOdometryCallback(const vehicle_dynamic_msgs::DrivingParameters& msg)
 {
     double currentTime = ros::Time::now().toSec();
-    ROS_INFO_STREAM("currentTime: " << currentTime);
+    // ROS_INFO_STREAM("currentTime: " << currentTime);
     double deltaTime = currentTime - lastUpdateTime;
-    ROS_INFO_STREAM("deltaTime: " << deltaTime);
+    // ROS_INFO_STREAM("deltaTime: " << deltaTime);
     lastUpdateTime = currentTime;
 
     // Convert speed from km/h to m/s steer_angle_status
@@ -49,9 +49,9 @@ void odometry_calculater::vehicleOdometryCallback(const vehicle_dynamic_msgs::Dr
        currentPosition.orientation.y = orientation_dy;
        
         // ROS_WARN_STREAM(yaw);
-        ROS_WARN_STREAM("currentPosition.position.x: " << currentPosition.position.x);
-        ROS_WARN_STREAM("currentPosition.position.y: " << currentPosition.position.y);
-        ROS_WARN_STREAM("totalDistance: " << totalDistance);
+        // ROS_WARN_STREAM("currentPosition.position.x: " << currentPosition.position.x);
+        // ROS_WARN_STREAM("currentPosition.position.y: " << currentPosition.position.y);
+        // ROS_WARN_STREAM("totalDistance: " << totalDistance);
 
        vehicle_odometry_pub.publish(currentPosition);
     }
@@ -71,7 +71,7 @@ odometry_calculater::odometry_calculater(ros::NodeHandle &nh)
     ROS_WARN_STREAM("drive_ratio: " << drive_ratio);
     
     // Create a subscriber for speed and steering data
-    odometry_update_sub = nh.subscribe("/driving_parametes", 10, &odometry_calculater::vehicleOdometryCallback, this);
+    odometry_update_sub = nh.subscribe("/driving_parameters", 10, &odometry_calculater::vehicleOdometryCallback, this);
     vehicle_odometry_pub = nh.advertise<geometry_msgs::Pose>("vehicle_odometry",10);
 
 }

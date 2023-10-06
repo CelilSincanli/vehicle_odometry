@@ -8,4 +8,7 @@
         <rosparam command="load" file="$(arg config_file)" />
     </node>
 
+    <node pkg="odometry_visualization" type="odometry_visualization" name="rviz_visualization">
+    </node>
+
 </launch>

@@ -12,6 +12,8 @@ add_message_files(
   DIRECTORY msg
   FILES
   DrivingParameters.msg
+  CAN_55.msg
+  CAN_56.msg
 )
 
 ## Generate added messages and services with any dependencies listed here
