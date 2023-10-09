@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-set(PROJECT_NAME rosbag_converter)
-project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES CXX)
+project(rosbag_converter VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++")
 set(CMAKE_CXX_STANDARD 14)
@@ -16,14 +15,11 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs vehicle_dynamic_msgs
-  DEPENDS system_lib
 )
 
 include_directories(
-  include
   ${catkin_INCLUDE_DIRS}
 )
 
