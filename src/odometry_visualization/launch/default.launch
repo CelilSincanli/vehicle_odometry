@@ -4,5 +4,5 @@
   </node>
   
   <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d ~/vehicle_odometry/src/bycycle_model_odometry/rviz/vehicle_odometry.rviz"> -->
-  </node> 
+  <!-- </node>  -->
 </launch>
