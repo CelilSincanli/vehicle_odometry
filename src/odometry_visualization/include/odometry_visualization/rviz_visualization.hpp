@@ -6,6 +6,8 @@
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 
+#define POINT_VECT_SIZE 10000
+
 class rviz_visualization {
 private:
 public:

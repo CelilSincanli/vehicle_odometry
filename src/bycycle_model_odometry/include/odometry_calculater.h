@@ -6,6 +6,10 @@
 
 #include "vehicle_dynamic_msgs/DrivingParameters.h"
 
+// TODO : Get rid of magic numbers
+#define KMH2MS 1000.0 / 3600.0
+#define DEG2RAD M_PI/180.0
+
 class odometry_calculater {
  private:
   double totalDistance = 0.0;

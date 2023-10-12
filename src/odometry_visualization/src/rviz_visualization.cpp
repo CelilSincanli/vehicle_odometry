@@ -24,7 +24,7 @@ rviz_visualization::rviz_visualization(ros::NodeHandle &nh) {
   marker.scale.z = 0.5;
   marker.color.a = 1.0;
   marker.color.r = 1.0;
-  marker.points.reserve(10000);
+  marker.points.reserve(POINT_VECT_SIZE);
 }
 
 void rviz_visualization::poseCallback(
@@ -34,12 +34,15 @@ void rviz_visualization::poseCallback(
   odometry_point.y = odometry_pose_msg->position.y;
   odometry_point.z = odometry_pose_msg->position.z;
 
-  if (marker.points.size() >= 10000) {
-    marker.points.erase(marker.points.begin());
+  static int point_count = 0;
+
+  if (point_count < POINT_VECT_SIZE) {
+    marker.points.push_back(odometry_point);
+  } else {
+    marker.points.at(point_count % POINT_VECT_SIZE) = odometry_point;
   }
 
-  marker.points.push_back(odometry_point);
-  // ROS_WARN_STREAM("marker.points.size: " << marker.points.size());
+  point_count += 1;
 
   marker_pub.publish(marker);
 }
