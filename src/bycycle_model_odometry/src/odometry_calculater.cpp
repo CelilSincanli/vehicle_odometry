@@ -14,24 +14,22 @@ double odometry_calculater::calculateFrontWheelAngle(
            tan(steeringWheelAngleRad / driveRatio));
 
   // Convert the angle back to degrees
-  double desiredFrontWheelAngleDeg = desiredFrontWheelAngleRad * 180.0 / M_PI;
+  double desiredFrontWheelAngleDeg = desiredFrontWheelAngleRad * DEG2RAD;
 
   return desiredFrontWheelAngleDeg;
 }
 
 void odometry_calculater::vehicleOdometryCallback(
     const vehicle_dynamic_msgs::DrivingParameters& msg) {
-  double currentTime = ros::Time::now().toSec();
-  // ROS_INFO_STREAM("currentTime: " << currentTime);
-  double deltaTime = currentTime - lastUpdateTime;
-  // ROS_INFO_STREAM("deltaTime: " << deltaTime);
+  const double currentTime = ros::Time::now().toSec();
+  const double deltaTime = currentTime - lastUpdateTime;
   lastUpdateTime = currentTime;
 
   // Convert speed from km/h to m/s steer_angle_status
-  double speed_mps = msg.vehicle_speed_status * 1000.0 / 3600.0;
+  const double speed_mps = msg.vehicle_speed_status * KMH2MS;
 
   // Implement bicycle model for position and orientation updates
-  double maxSteeringWheelAngleDeg =
+  const double maxSteeringWheelAngleDeg =
       900.0;  // Maximum steering wheel angle in degrees
   steering_wheel_angle_deg =
       std::max(-maxSteeringWheelAngleDeg,
@@ -40,11 +38,11 @@ void odometry_calculater::vehicleOdometryCallback(
   steering_angle = calculateFrontWheelAngle(
       steering_wheel_angle_deg, wheel_base, wheel_track_width, drive_ratio);
 
-  double heading_dtheta = speed_mps * tan(steering_angle) / wheel_base;
-  double position_dx = speed_mps * cos(heading_dtheta) * deltaTime;
-  double position_dy = speed_mps * sin(heading_dtheta) * deltaTime;
-  double orientation_dx = cos(heading_dtheta);
-  double orientation_dy = sin(heading_dtheta);
+  const double heading_dtheta = speed_mps * tan(steering_angle) / wheel_base;
+  const double position_dx = speed_mps * cos(heading_dtheta) * deltaTime;
+  const double position_dy = speed_mps * sin(heading_dtheta) * deltaTime;
+  const double orientation_dx = cos(heading_dtheta);
+  const double orientation_dy = sin(heading_dtheta);
 
   if (speed_mps != 0) {
     totalDistance += sqrt(pow((position_dx), 2) + pow((position_dy), 2));
@@ -55,21 +53,15 @@ void odometry_calculater::vehicleOdometryCallback(
     currentPosition.orientation.x = orientation_dx;
     currentPosition.orientation.y = orientation_dy;
 
-    // ROS_WARN_STREAM(yaw);
-    // ROS_WARN_STREAM("currentPosition.position.x: " <<
-    // currentPosition.position.x); ROS_WARN_STREAM("currentPosition.position.y:
-    // " << currentPosition.position.y); ROS_WARN_STREAM("totalDistance: " <<
-    // totalDistance);
-
     vehicle_odometry_pub.publish(currentPosition);
   }
 }
 
 odometry_calculater::odometry_calculater(ros::NodeHandle& nh) {
-  nh.getParam("wheel_base", wheel_base);
-  nh.getParam("wheel_track_width", wheel_track_width);
-  nh.getParam("maximum_wheel_angle", maximum_wheel_angle);
-  nh.getParam("drive_ratio", drive_ratio);
+  nh.param<double>("wheel_base", wheel_base, 4.8);
+  nh.param<double>("wheel_track_width", wheel_track_width, 2.17);
+  nh.param<double>("maximum_wheel_angle", maximum_wheel_angle, 40.0);
+  nh.param<double>("drive_ratio", drive_ratio, 5.13);
 
   ROS_WARN_STREAM("wheel_base: " << wheel_base);
   ROS_WARN_STREAM("wheel_track_width: " << wheel_track_width);
