@@ -38,12 +38,6 @@ void odometry_calculater::vehicleOdometryCallback(
   delta_angle =
       steering_wheel_angle_deg * (maximum_wheel_angle / max_steer_wheel_angle);
 
-  const double position_dx = speed_mps * cos(yaw_angle) * deltaTime;
-  const double position_dy = speed_mps * sin(yaw_angle) * deltaTime;
-  yaw_angle += (speed_mps / wheel_base) * tan(delta_angle) * deltaTime;
-  const double orientation_dx = cos(yaw_angle);
-  const double orientation_dy = sin(yaw_angle);
-
   if (speed_mps != 0) {
     update(speed_mps, delta_angle, deltaTime);
   }
