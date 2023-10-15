@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>bycycle_model_odometry</name>
+  <name>bicycle_model_odometry</name>
   <version>0.0.1</version>
-  <description>The bycycle_model_odometry package</description>
+  <description>The bicycle_model_odometry package</description>
 
   <maintainer email="icelilsincanli@gmail.com">celil</maintainer>
 
-  <license>TODO</license>
+  <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
@@ -25,9 +25,4 @@
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>vehicle_dynamic_msgs</exec_depend>
 
-  <!-- The export tag contains other, unspecified, tags -->
-  <export>
-    <!-- Other tools can request additional information be placed here -->
-
-  </export>
 </package>
