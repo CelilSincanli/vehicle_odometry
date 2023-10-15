@@ -11,4 +11,7 @@
     <node pkg="odometry_visualization" type="odometry_visualization" name="rviz_visualization">
     </node>
 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(env HOME)/vehicle_odometry/src/odometry_visualization/rviz/vehicle_odometry.rviz" output="screen">
+    </node>
+     
 </launch>

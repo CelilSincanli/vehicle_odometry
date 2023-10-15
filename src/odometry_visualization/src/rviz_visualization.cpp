@@ -19,9 +19,9 @@ rviz_visualization::rviz_visualization(ros::NodeHandle &nh) {
   marker.ns = "odometry_points";
   marker.type = visualization_msgs::Marker::POINTS;
   marker.action = visualization_msgs::Marker::ADD;
-  marker.scale.x = 0.5;
-  marker.scale.y = 0.5;
-  marker.scale.z = 0.5;
+  marker.scale.x = 1.0;
+  marker.scale.y = 1.0;
+  marker.scale.z = 1.0;
   marker.color.a = 1.0;
   marker.color.r = 1.0;
   marker.points.reserve(POINT_VECT_SIZE);
@@ -33,6 +33,8 @@ void rviz_visualization::poseCallback(
   odometry_point.x = odometry_pose_msg->position.x;
   odometry_point.y = odometry_pose_msg->position.y;
   odometry_point.z = odometry_pose_msg->position.z;
+
+  ROS_WARN_STREAM("odometry_point: " << odometry_point);
 
   static int point_count = 0;
 
